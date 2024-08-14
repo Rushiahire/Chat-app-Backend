@@ -1,16 +1,23 @@
 import express from "express";
 import { dbConnection } from "./dbConnection.js";
-import userRoute from "./routes/user.js";
+import userRoute from "./routes/userRoute.js";
+import authRoute from "./routes/authRoute.js";
+import messagesRoute from "./routes/messagesRoute.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
+
 dbConnection();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
 app.use(cookieParser());
+app.use(cors());
+dotenv.config();
 
-app.use("/v1", userRoute);
+app.use("/", userRoute);
+app.use("/v1", authRoute);
+app.use("/v1/messages", messagesRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello");
