@@ -15,18 +15,29 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
 
 // configDotenv({
 //   path: "./data/config.env",
 // });
 
+app.use(
+  cors({
+    origin: ["", "http://localhost:3000"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 app.use("/", userRoute);
 app.use("/v1", authRoute);
 app.use("/v1/messages", messagesRoute);
 
 app.get("/", (req, res) => {
-  res.send("Hello");
+  try {
+    res.send("welcome");
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 const port = 4000;
