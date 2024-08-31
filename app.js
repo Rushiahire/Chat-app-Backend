@@ -1,19 +1,25 @@
 import express from "express";
-import { dbConnection } from "./dbConnection.js";
+import { connectDB } from "./data/dbConnection.js";
 import userRoute from "./routes/userRoute.js";
 import authRoute from "./routes/authRoute.js";
 import messagesRoute from "./routes/messagesRoute.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import dotenv from "dotenv";
+import { configDotenv } from "dotenv";
+import dotenv from 'dotenv';
 
-dbConnection();
+
+connectDB();
+dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
-dotenv.config();
+
+// configDotenv({
+//   path: "./data/config.env",
+// });
 
 app.use("/", userRoute);
 app.use("/v1", authRoute);
