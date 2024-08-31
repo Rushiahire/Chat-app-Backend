@@ -4,6 +4,6 @@ import isAuthenticated from "../middleware/isAuthenticated.js";
 
 const router = express.Router();
 
-router.get("/", getAllSidebarUsers);
+router.get("/users", getAllSidebarUsers);
 
 export default router;
