@@ -2,13 +2,13 @@ import mongoose from "mongoose";
 
 export const connectDB = async () => {
   try {
-    // const uri = process.env;
-    // console.log("err", uri)
-    // if (!uri) {
-    //   throw new Error("MONGODB_URI environment variable not set");
-    // }
+    const uri = process.env.MONGODB_URI;
+    console.log("err", uri)
+    if (!uri) {
+      throw new Error("MONGODB_URI environment variable not set");
+    }
 
-    await mongoose.connect('mongodb+srv://rushiahire9567:SY6fzfR9NzZNa4jb@chatapp.t9c4m.mongodb.net/', {
+    await mongoose.connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       dbName: "chatApp"

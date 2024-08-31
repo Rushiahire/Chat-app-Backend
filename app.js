@@ -6,19 +6,13 @@ import messagesRoute from "./routes/messagesRoute.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { configDotenv } from "dotenv";
-import dotenv from 'dotenv';
+
+export const app = express();
 
 
-connectDB();
-dotenv.config();
-
-const app = express();
-app.use(express.json());
-app.use(cookieParser());
-
-// configDotenv({
-//   path: "./data/config.env",
-// });
+configDotenv({
+  path: "./data/config.env",
+});
 
 app.use(
   cors({
@@ -28,6 +22,12 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
+app.use(express.json());
+app.use(cookieParser());
+
+
+
 app.use("/", userRoute);
 app.use("/v1", authRoute);
 app.use("/v1/messages", messagesRoute);
@@ -40,7 +40,4 @@ app.get("/", (req, res) => {
   }
 });
 
-// const port = 4000;
-app.listen(process.env.PORT, () => {
-  console.log(`Server started on port ${process.env.PORT}`);
-});
+
