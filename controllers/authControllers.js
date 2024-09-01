@@ -14,7 +14,7 @@ export const registerUser = async (req, res) => {
 
     let emailAvl = await users.findOne({ email });
     if (emailAvl) {
-      res.status(409).json({ message: `${email} already in use` });
+      res.status(409).json({ status: "success", message: `${email} already in use` });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -71,7 +71,7 @@ export const loginUser = async (req, res) => {
     });
 
     return res.status(200).json({
-      status: true,
+      status: "success",
       message: "Login successfully!",
       token,
     });

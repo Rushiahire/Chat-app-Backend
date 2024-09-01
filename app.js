@@ -19,7 +19,7 @@ app.use(
     origin: ["https://chat-ph1545ugd-rushiahires-projects.vercel.app/", "http://localhost:3000"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: ["Content-Type", "Authorization", "cookies"],
   })
 );
 
