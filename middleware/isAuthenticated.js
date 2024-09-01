@@ -3,8 +3,7 @@ import { users } from "../models/userModel.js";
 
 const isAuthenticated = async (req, res, next) => {
   try {
-    console.log("req", req.cookies.AuthToken)
-    const token = req.cookies.AuthToken || req.params.Authorization; // Ensure this matches the cookie name
+    const token = req.cookies.AuthToken || req.headers.authorization?.split(" ")[1];// Ensure this matches the cookie name
 
     if (!token) {
       return res
